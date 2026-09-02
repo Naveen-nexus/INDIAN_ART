@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>ChitraKala | Interactive Map of Indian Art History & Cultural Heritage</title>
+    <meta name="description" content="Explore the rich geographic spread, historical evolution, and regional diversity of Indian art forms from ancient rock-cut caves and temple sculptures to miniature paintings and living tribal traditions.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS (Multiple CDNs) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    
+    <!-- Canvas Confetti for Quiz -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=2.1">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#hero" class="logo" id="main-logo">
+                <i class="fa-solid fa-palette logo-icon"></i>
+                <span class="logo-text">Chitra<span class="logo-accent">Kala</span></span>
+                <span class="logo-tagline">Indian Art Atlas</span>
+            </a>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#map-explorer" class="nav-link">Art Map</a>
+                <a href="#tours-section" class="nav-link">Guided Tours</a>
+                <a href="#influence-section" class="nav-link">Artistic Spread</a>
+                <a href="#timeline-section" class="nav-link">Timeline</a>
+                <a href="#gallery-section" class="nav-link">Masterpieces</a>
+                <a href="#quiz-section" class="nav-link">Art Quiz</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="nav-action-btn" id="expedition-toggle-btn" title="View Saved Expedition Itinerary" aria-label="Expedition Bookmarks">
+                    <i class="fa-solid fa-compass"></i>
+                    <span class="bookmark-badge" id="bookmark-count">0</span>
+                </button>
+                <button class="theme-btn" id="theme-toggle" title="Switch Light/Dark Mode" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger" title="Open Menu" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <span class="badge"><i class="fa-solid fa-landmark"></i> Living Heritage of Bharat</span>
+            <h1>The Geographic Odyssey of <span>Indian Art</span></h1>
+            <p>Journey through 5,000 years of aesthetic mastery—from Mesolithic rock art and Ajanta's celestial frescoes to royal miniature ateliers, Chola bronzes, and sacred folk traditions.</p>
+            
+            <div class="hero-buttons">
+                <a href="#map-explorer" class="btn btn-primary" id="hero-explore-btn">
+                    <i class="fa-solid fa-map-location-dot"></i> Explore Digital Map
+                </a>
+                <a href="#tours-section" class="btn btn-secondary" id="hero-tours-btn">
+                    <i class="fa-solid fa-route"></i> Start Guided Tour
+                </a>
+                <a href="#quiz-section" class="btn btn-gold" id="hero-quiz-btn">
+                    <i class="fa-solid fa-award"></i> Art Historian Quiz
+                </a>
+            </div>
+
+            <div class="hero-quick-stats">
+                <div class="quick-stat-item">
+                    <span class="quick-stat-num" id="stat-locations-count">24</span>
+                    <span class="quick-stat-label">Artistic Epicenters</span>
+                </div>
+                <div class="quick-stat-divider"></div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-num">5,000+</span>
+                    <span class="quick-stat-label">Years of History</span>
+                </div>
+                <div class="quick-stat-divider"></div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-num" id="stat-genres-count">8</span>
+                    <span class="quick-stat-label">Major Art Traditions</span>
+                </div>
+                <div class="quick-stat-divider"></div>
+                <div class="quick-stat-item">
+                    <span class="quick-stat-num">5</span>
+                    <span class="quick-stat-label">Diffusion Vectors</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#intro" class="scroll-indicator" aria-label="Scroll Down">
+            <span>Discover More</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Intro & Context Section -->
+    <section class="intro-section" id="intro">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-compass-drafting"></i> Cultural Geography</span>
+                <h2>Sacred Geographies & Artistic Lineages</h2>
+                <p class="section-subtitle">How topography, royal patronage, religious philosophies, and guild craftsmanship shaped regional art forms across the Indian subcontinent.</p>
+            </div>
+
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <p>Indian art history is not a static chronicle but a vibrant tapestry of regional innovations and cross-cultural synthesis. Cave sanctuaries in the Deccan hills carved monumental stories out of basalt; royal miniature ateliers in the Rajasthani deserts and Himalayan foothills captured lyrical romanticism with crushed ruby and lapis lazuli pigments.</p>
+                    <p>Simultaneously, sacred temple sculptors of Tamil Nadu perfected the lost-wax bronze casting technique, while indigenous communities from Mithila and the Sahyadri mountains preserved sacred geometric worldviews using natural ochre and rice paste.</p>
+                    
+                    <div class="intro-highlights">
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-mountain-sun"></i>
+                            <div>
+                                <h4>Natural Pigments & Local Media</h4>
+                                <p>Lampblack, indigo, cinnabar, gold leaf, and river mud.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-crown"></i>
+                            <div>
+                                <h4>Dynastic Patronage & Guilds</h4>
+                                <p>Guptas, Vakatakas, Cholas, Mughals, Rajputs, and community elders.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <div>
+                                <h4>Trans-Regional Cross-Pollination</h4>
+                                <p>Influence routes linking Ajanta to Dunhuang and Chola to Angkor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-icon-wrap"><i class="fa-solid fa-paintbrush"></i></div>
+                        <div>
+                            <h3 id="stat-artworks-count">24</h3><span class="stat-suffix">+</span>
+                            <p>Iconic Art Centers Documented</p>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon-wrap"><i class="fa-solid fa-scroll"></i></div>
+                        <div>
+                            <h3>14</h3><span class="stat-suffix"></span>
+                            <p>Imperial Dynasties & Kingdoms Represented</p>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon-wrap"><i class="fa-solid fa-headphones"></i></div>
+                        <div>
+                            <h3>24</h3><span class="stat-suffix"></span>
+                            <p>Interactive Audio Guides with Spoken Lore</p>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon-wrap"><i class="fa-solid fa-users"></i></div>
+                        <div>
+                            <h3>30+</h3><span class="stat-suffix"></span>
+                            <p>Master Artists, Patrons & Ancient Guilds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Explorer Section -->
+    <section class="map-section" id="map-explorer">
+        <div class="container-fluid map-wrapper">
+            
+            <!-- Map Top Bar / Header -->
+            <div class="map-top-bar">
+                <div class="map-title-block">
+                    <h2><i class="fa-solid fa-map-location-dot"></i> Interactive Map of Indian Art Hubs</h2>
+                    <p class="map-subtext">Click any art pin or region to inspect traditions, artists, historical context, and techniques. Toggle layers to reveal diffusion vectors.</p>
+                </div>
+
+                <div class="map-actions-group">
+                    <div class="map-search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="map-search-input" placeholder="Search location, art style, artist, or dynasty..." autocomplete="off">
+                        <button id="map-search-clear" class="clear-search-btn hidden" title="Clear search"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <!-- Map View Switcher: Heritage Vector Map / Tile Map -->
+                    <div class="map-view-switcher">
+                        <button class="map-view-btn active" id="view-vector-map-btn" title="Heritage Geographic Vector Map">
+                            <i class="fa-solid fa-map"></i> <span>Heritage Map</span>
+                        </button>
+                        <button class="map-view-btn" id="view-tile-map-btn" title="Carto/Satellite Tiles">
+                            <i class="fa-solid fa-earth-asia"></i> <span>Street Tiles</span>
+                        </button>
+                    </div>
+
+                    <button class="map-control-btn" id="toggle-influence-btn" title="Show or Hide Historical Artistic Diffusion Routes">
+                        <i class="fa-solid fa-route"></i>
+                        <span id="influence-btn-text">Show Influence Routes</span>
+                    </button>
+
+                    <button class="map-control-btn" id="reset-map-view-btn" title="Reset Map View">
+                        <i class="fa-solid fa-expand"></i>
+                        <span>Reset View</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Toolbar -->
+            <div class="map-filters-bar">
+                <!-- Art Category Filter -->
+                <div class="filter-group">
+                    <span class="filter-label"><i class="fa-solid fa-filter"></i> Category:</span>
+                    <div class="filter-chips" id="category-filter-chips">
+                        <button class="chip active" data-category="all">All Styles</button>
+                        <button class="chip" data-category="Murals & Frescoes"><i class="fa-solid fa-brush"></i> Murals & Caves</button>
+                        <button class="chip" data-category="Miniature Painting"><i class="fa-solid fa-palette"></i> Miniature Painting</button>
+                        <button class="chip" data-category="Rock-cut & Sculpture"><i class="fa-solid fa-gem"></i> Sculptures & Temples</button>
+                        <button class="chip" data-category="Folk & Tribal Art"><i class="fa-solid fa-feather"></i> Folk & Tribal</button>
+                        <button class="chip" data-category="Textiles & Pichwai"><i class="fa-solid fa-scroll"></i> Textiles & Pichwai</button>
+                        <button class="chip" data-category="Modern & Renaissance"><i class="fa-solid fa-wand-magic-sparkles"></i> Modern & Renaissance</button>
+                    </div>
+                </div>
+
+                <!-- Secondary Filters: Era & Region -->
+                <div class="filter-dropdowns">
+                    <div class="dropdown-wrap">
+                        <label for="era-select"><i class="fa-solid fa-timeline"></i> Era:</label>
+                        <select id="era-select" class="custom-select">
+                            <option value="all">All Eras (Prehistoric – Modern)</option>
+                            <option value="Prehistoric & Ancient">Prehistoric & Ancient (10,000 BCE – 300 CE)</option>
+                            <option value="Classical & Cave Art">Classical Golden Age (300 CE – 800 CE)</option>
+                            <option value="Medieval Temple Age">Medieval Temple Era (800 CE – 1300 CE)</option>
+                            <option value="Late Medieval & Sultanate">Late Medieval & Deccani (1300 CE – 1550 CE)</option>
+                            <option value="Mughal & Rajput Golden Age">Mughal & Rajput Miniatures (1550 CE – 1800 CE)</option>
+                            <option value="Colonial & Bengal School">Colonial & Bengal Renaissance (1800 CE – 1940 CE)</option>
+                            <option value="Modern & Living Heritage">Modern & Living Traditions</option>
+                        </select>
+                    </div>
+
+                    <div class="dropdown-wrap">
+                        <label for="region-select"><i class="fa-solid fa-compass"></i> Region:</label>
+                        <select id="region-select" class="custom-select">
+                            <option value="all">All Subcontinent Regions</option>
+                            <option value="North">North India (Himalayas & Plains)</option>
+                            <option value="South">South India (Peninsular & Deccan)</option>
+                            <option value="East">East India (Bengal & Odisha)</option>
+                            <option value="West">West India (Rajasthan & Gujarat)</option>
+                            <option value="Central">Central India (Madhya Pradesh & Bastar)</option>
+                            <option value="Northeast">Northeast India (Tripura & Beyond)</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-status">
+                        Showing <strong id="visible-count">24</strong> of <strong id="total-count">24</strong> hubs
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Layout Container -->
+            <div class="map-display-container">
+                <!-- Primary: Interactive Heritage Vector Map of India -->
+                <div id="vector-map-canvas" class="vector-map-canvas">
+                    <!-- Injected dynamically via script.js -->
+                </div>
+
+                <!-- Secondary: Leaflet Map Instance -->
+                <div id="art-map" class="art-map-canvas hidden" role="region" aria-label="Interactive Indian Art History Map"></div>
+
+                <!-- Map Sidebar / Floating Location Info Preview Drawer -->
+                <aside class="map-sidebar" id="map-sidebar">
+                    <div class="sidebar-header">
+                        <span class="sidebar-badge" id="sidebar-category">Mural Art</span>
+                        <button class="sidebar-close-btn" id="sidebar-close-btn" title="Close Preview"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    
+                    <div class="sidebar-img-wrapper">
+                        <img src="" alt="Selected Art Hub" id="sidebar-img">
+                        <span class="sidebar-period-tag" id="sidebar-period">5th Century CE</span>
+                    </div>
+
+                    <div class="sidebar-body">
+                        <h3 id="sidebar-title">Ajanta Caves</h3>
+                        <div class="sidebar-meta">
+                            <span id="sidebar-location"><i class="fa-solid fa-location-dot"></i> Maharashtra</span>
+                            <span id="sidebar-dynasty"><i class="fa-solid fa-crown"></i> Vakataka Empire</span>
+                        </div>
+                        <p id="sidebar-desc" class="sidebar-description">
+                            World-renowned rock-cut cave monuments featuring masterpiece tempera frescoes depicting Jataka tales, Buddhist divinities, and expressive mastery.
+                        </p>
+                        
+                        <div class="sidebar-highlights">
+                            <div class="sidebar-stat">
+                                <span class="label">Iconic Work</span>
+                                <strong id="sidebar-masterpiece">Bodhisattva Padmapani</strong>
+                            </div>
+                            <div class="sidebar-stat">
+                                <span class="label">Primary Medium</span>
+                                <strong id="sidebar-medium">Mineral Fresco on Mud Plaster</strong>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-actions">
+                            <button class="btn btn-primary btn-block" id="sidebar-open-dossier">
+                                <i class="fa-solid fa-book-open"></i> Explore Complete Dossier
+                            </button>
+                            <div class="sidebar-btn-row">
+                                <button class="btn btn-outline" id="sidebar-audio-play" title="Play Voice Audio Guide">
+                                    <i class="fa-solid fa-volume-high"></i> Listen
+                                </button>
+                                <button class="btn btn-outline" id="sidebar-bookmark-btn" title="Save to Expedition">
+                                    <i class="fa-regular fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Map Legend Overlay -->
+                <div class="map-legend" id="map-legend">
+                    <h4><i class="fa-solid fa-layer-group"></i> Art Traditions Legend</h4>
+                    <div class="legend-grid">
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #9e3623;"></span> Murals & Caves</div>
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #c29b38;"></span> Miniature Painting</div>
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #1b4965;"></span> Rock-Cut & Sculpture</div>
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #2d6a4f;"></span> Folk & Tribal Art</div>
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #a37081;"></span> Textiles & Pichwai</div>
+                        <div class="legend-item"><span class="legend-dot" style="background-color: #d90429;"></span> Modern & Renaissance</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guided Journey Tour Bar -->
+            <div class="tour-control-panel" id="tour-control-panel">
+                <div class="tour-header-info">
+                    <div class="tour-badge-pill"><i class="fa-solid fa-compass"></i> Curated Odyssey Mode</div>
+                    <h3 id="current-tour-name">The Sacred Frescoes & Cave Sanctuaries Route</h3>
+                    <p id="current-tour-desc">Witness the celestial brushstrokes of ancient Indian cave wall painters spanning over a millennium.</p>
+                </div>
+
+                <div class="tour-stepper">
+                    <button class="tour-nav-btn" id="tour-prev-btn" title="Previous Stop"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="tour-step-info">
+                        <span>Stop <strong id="tour-step-current">1</strong> of <strong id="tour-step-total">4</strong>:</span>
+                        <h4 id="tour-step-title">Ajanta Caves (Maharashtra)</h4>
+                    </div>
+                    <button class="tour-nav-btn" id="tour-next-btn" title="Next Stop"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+
+                <div class="tour-action-buttons">
+                    <button class="btn btn-secondary btn-sm" id="tour-auto-play-btn">
+                        <i class="fa-solid fa-play"></i> Auto Tour
+                    </button>
+                    <button class="btn btn-primary btn-sm" id="tour-view-stop-btn">
+                        <i class="fa-solid fa-expand"></i> Inspect Stop
+                    </button>
+                    <button class="btn-icon-close" id="tour-exit-btn" title="Exit Tour"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Curated Storytelling Tours Section -->
+    <section class="tours-section" id="tours-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-route"></i> Thematic Expeditions</span>
+                <h2>Curated Art Journeys Across India</h2>
+                <p class="section-subtitle">Embark on guided chronological and thematic expeditions exploring the evolution of specialized artistic disciplines.</p>
+            </div>
+
+            <div class="tours-grid">
+                <!-- Tour 1 -->
+                <div class="tour-card" data-tour-id="frescoes">
+                    <div class="tour-card-img" id="tour-img-frescoes">
+                        <span class="tour-tag">4 Key Sanctuaries</span>
+                    </div>
+                    <div class="tour-card-body">
+                        <h3>The Sacred Frescoes Route</h3>
+                        <p>From the primordial rock shelters of Bhimbetka to the sublime Buddhist caves of Ajanta, Badami's Chalukyan murals, and Kerala's temple frescoes.</p>
+                        <div class="tour-meta">
+                            <span><i class="fa-solid fa-clock"></i> 10,000 BCE – 17th Century</span>
+                            <span><i class="fa-solid fa-paintbrush"></i> Tempera & Mineral Pigments</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm start-tour-btn" data-tour="frescoes">
+                            <i class="fa-solid fa-play"></i> Launch Journey on Map
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour 2 -->
+                <div class="tour-card" data-tour-id="miniatures">
+                    <div class="tour-card-img" id="tour-img-miniatures">
+                        <span class="tour-tag">5 Royal Ateliers</span>
+                    </div>
+                    <div class="tour-card-body">
+                        <h3>Royal Miniature Painting Odyssey</h3>
+                        <p>Discover the lyrical refinement of Kishangarh (Bani Thani), Kangra Pahari masterpieces, Basohli intensity, Nathdwara Pichwai, and Mughal court chronicles.</p>
+                        <div class="tour-meta">
+                            <span><i class="fa-solid fa-clock"></i> 16th – 19th Century</span>
+                            <span><i class="fa-solid fa-gem"></i> Gold Leaf & Squirrel Hair Brushes</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm start-tour-btn" data-tour="miniatures">
+                            <i class="fa-solid fa-play"></i> Launch Journey on Map
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour 3 -->
+                <div class="tour-card" data-tour-id="sculptures">
+                    <div class="tour-card-img" id="tour-img-sculptures">
+                        <span class="tour-tag">5 Architectural Wonders</span>
+                    </div>
+                    <div class="tour-card-body">
+                        <h3>Imperial Sculptures & Monoliths</h3>
+                        <p>Marvel at the monolithic Kailasa at Ellora, the cosmic Nataraja bronzes of Thanjavur, Hoysala soapstone filigree, Mathura Kushana idols, and Khajuraho reliefs.</p>
+                        <div class="tour-meta">
+                            <span><i class="fa-solid fa-clock"></i> 1st – 13th Century</span>
+                            <span><i class="fa-solid fa-hammer"></i> Lost-Wax Bronze & Stone Reliefs</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm start-tour-btn" data-tour="sculptures">
+                            <i class="fa-solid fa-play"></i> Launch Journey on Map
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tour 4 -->
+                <div class="tour-card" data-tour-id="tribal">
+                    <div class="tour-card-img" id="tour-img-tribal">
+                        <span class="tour-tag">5 Living Traditions</span>
+                    </div>
+                    <div class="tour-card-body">
+                        <h3>Living Indigenous & Tribal Traditions</h3>
+                        <p>Celebrate unbroken vernacular expressions: Warli geometric rituals, Mithila/Madhubani sacred cosmology, Bastar Dhokra lost-wax metalcraft, and Odisha Pattachitra.</p>
+                        <div class="tour-meta">
+                            <span><i class="fa-solid fa-clock"></i> Ancient to Living Present</span>
+                            <span><i class="fa-solid fa-leaf"></i> Rice Paste, Ochre & Natural Gums</span>
+                        </div>
+                        <button class="btn btn-primary btn-sm start-tour-btn" data-tour="tribal">
+                            <i class="fa-solid fa-play"></i> Launch Journey on Map
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geographic Influence & Diffusion Network Section -->
+    <section class="influence-section" id="influence-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-network-wired"></i> Trans-Regional Diffusion</span>
+                <h2>The Geographic Spread & Cross-Pollination of Styles</h2>
+                <p class="section-subtitle">How master ateliers, maritime trading routes, pilgrim pathways, and royal migrations spread Indian artistic concepts across Asia and the world.</p>
+            </div>
+
+            <div class="influence-showcase-grid">
+                <div class="influence-map-info-card">
+                    <div class="route-selector-list">
+                        <button class="route-item active" data-route="ajanta-silkroad">
+                            <div class="route-num">01</div>
+                            <div class="route-details">
+                                <h4>Ajanta's Continental Wave</h4>
+                                <p>Deccan Cave Murals &rarr; Sigiriya (Sri Lanka) & Dunhuang Mogao Caves (Silk Road)</p>
+                            </div>
+                        </button>
+                        
+                        <button class="route-item" data-route="mughal-pahari">
+                            <div class="route-num">02</div>
+                            <div class="route-details">
+                                <h4>The Miniature Synthesis</h4>
+                                <p>Persian Ateliers + Indigenous Rajput Styles &rarr; Imperial Mughal &rarr; Kangra & Basohli Pahari Hills</p>
+                            </div>
+                        </button>
+
+                        <button class="route-item" data-route="chola-maritime">
+                            <div class="route-num">03</div>
+                            <div class="route-details">
+                                <h4>Chola Maritime Bronze Diffusion</h4>
+                                <p>Thanjavur & Kaveri Delta &rarr; Sri Lanka, Srivijaya (Indonesia), Angkor (Cambodia) & Champa</p>
+                            </div>
+                        </button>
+
+                        <button class="route-item" data-route="bengal-renaissance">
+                            <div class="route-num">04</div>
+                            <div class="route-details">
+                                <h4>Bengal Renaissance to Pan-India Modernism</h4>
+                                <p>Kolkata & Santiniketan &rarr; Mumbai (PAG), Madras Progressive Movement & Global Modernism</p>
+                            </div>
+                        </button>
+
+                        <button class="route-item" data-route="deccan-kerala">
+                            <div class="route-num">05</div>
+                            <div class="route-details">
+                                <h4>Vijayanagara to Kerala Temple Murals</h4>
+                                <p>Hampi & Lepakshi &rarr; Padmanabhapuram, Mattancherry & Guruvayur Frescoes</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="route-action-cta">
+                        <button class="btn btn-primary" id="visualize-all-routes-btn">
+                            <i class="fa-solid fa-eye"></i> Plot Selected Route on Live Map
+                        </button>
+                    </div>
+                </div>
+
+                <div class="influence-detail-box" id="influence-narrative-box">
+                    <div class="influence-header">
+                        <span class="badge" id="route-badge">Global Maritime & Silk Road</span>
+                        <h3 id="route-title">Ajanta's Continental Wave & Cave Frescoes</h3>
+                    </div>
+                    
+                    <div class="influence-body">
+                        <p id="route-desc-1">
+                            The fluid contours, emotional facial expressions, and naturalistic shading perfected in the Vakataka caves of Ajanta (5th century CE) became the gold standard for sacred Buddhist painting throughout Asia.
+                        </p>
+                        <div class="influence-quote" id="route-quote">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <span id="route-quote-text">"From the basalt cliffs of the Waghora river, the aesthetic language of the Bodhisattvas travelled along the northern Silk Route to Dunhuang in China and southward across the Palk Strait to the Sigiriya cloud maidens of Sri Lanka."</span>
+                        </div>
+                        <p id="route-desc-2">
+                            Monks and artist guilds carried sketchbooks along trade caravans, ensuring that Ajanta's three-dimensional modeling technique influenced the wall paintings of Bagh Caves in Central India, Bamiyan in Afghanistan, and Kizil in Central Asia.
+                        </p>
+
+                        <div class="route-nodes-flow">
+                            <div class="node-pill"><i class="fa-solid fa-circle-dot"></i> <span>Ajanta (Origin)</span></div>
+                            <i class="fa-solid fa-arrow-right node-arrow"></i>
+                            <div class="node-pill"><i class="fa-solid fa-mountain"></i> <span>Bagh Caves (MP)</span></div>
+                            <i class="fa-solid fa-arrow-right node-arrow"></i>
+                            <div class="node-pill"><i class="fa-solid fa-earth-asia"></i> <span>Sigiriya & Dunhuang</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chronological Timeline Section -->
+    <section class="timeline-section" id="timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-hourglass-half"></i> Chronological Evolution</span>
+                <h2>5,000 Years of Indian Artistic Heritage</h2>
+                <p class="section-subtitle">Trace the historical milestones, major dynastic breakthroughs, and aesthetic shifts that defined Indian art through the ages.</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="timeline-controls">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="timeline-search" placeholder="Search timeline by era, dynasty, or art form..." autocomplete="off">
+                </div>
+                
+                <div class="filter-buttons" id="timeline-filter-buttons">
+                    <button class="filter-btn active" data-era="all">All Epochs</button>
+                    <button class="filter-btn" data-era="Prehistoric">Prehistoric & Antiquity</button>
+                    <button class="filter-btn" data-era="Classical">Classical Golden Age</button>
+                    <button class="filter-btn" data-era="Medieval">Medieval Sculptures</button>
+                    <button class="filter-btn" data-era="Mughal-Rajput">Mughal & Rajput Courts</button>
+                    <button class="filter-btn" data-era="Modern">Renaissance & Modern</button>
+                </div>
+            </div>
+
+            <!-- Progress Track -->
+            <div class="timeline-progress-track">
+                <div class="timeline-progress-bar" id="timeline-progress-bar"></div>
+            </div>
+
+            <!-- Dynamic Timeline Feed Container -->
+            <div class="timeline-container" id="timeline-container">
+                <!-- Generated dynamically via script.js -->
+            </div>
+
+            <div class="no-results hidden" id="timeline-no-results">
+                <i class="fa-solid fa-feather"></i>
+                <h3>No art milestones matched your search</h3>
+                <p>Try clearing your search query or selecting "All Epochs".</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Art Gallery Section -->
+    <section class="gallery-section" id="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-palette"></i> Curated Masterpieces</span>
+                <h2>Iconic Works of Indian Art</h2>
+                <p class="section-subtitle">A visual celebration of benchmark paintings, bas-reliefs, bronzes, and folk compositions preserved across the subcontinent.</p>
+            </div>
+
+            <!-- Gallery Filter Bar -->
+            <div class="gallery-filter-bar">
+                <button class="gallery-filter-btn active" data-gallery-cat="all">All Masterpieces</button>
+                <button class="gallery-filter-btn" data-gallery-cat="painting">Paintings & Miniatures</button>
+                <button class="gallery-filter-btn" data-gallery-cat="sculpture">Sculptures & Bronzes</button>
+                <button class="gallery-filter-btn" data-gallery-cat="fresco">Cave Murals</button>
+                <button class="gallery-filter-btn" data-gallery-cat="folk">Folk & Living Arts</button>
+            </div>
+
+            <!-- Gallery Cards Grid -->
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Injected dynamically via script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Art Historian Interactive Quiz Section -->
+    <section class="quiz-section" id="quiz-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-graduation-cap"></i> Interactive Challenge</span>
+                <h2>The Art Historian Challenge</h2>
+                <p class="section-subtitle">Test your knowledge of India's regional art movements, iconic masterpieces, techniques, and historical origins!</p>
+            </div>
+
+            <div class="quiz-container-card" id="quiz-container-card">
+                <!-- Quiz Intro State -->
+                <div class="quiz-intro-state" id="quiz-intro-state">
+                    <div class="quiz-icon-badge">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3>Ready to Test Your Art Knowledge?</h3>
+                    <p>Answer 8 visual and historical questions covering cave paintings, miniature ateliers, tribal symbolism, and royal patrons. Can you earn the title of <strong>Grand Master of Indian Art</strong>?</p>
+                    <ul class="quiz-features-list">
+                        <li><i class="fa-solid fa-check"></i> High-resolution artwork identification</li>
+                        <li><i class="fa-solid fa-check"></i> Instant historical explanations</li>
+                        <li><i class="fa-solid fa-check"></i> Final certificate & score breakdown</li>
+                    </ul>
+                    <button class="btn btn-gold btn-lg" id="quiz-start-btn">
+                        <i class="fa-solid fa-bolt"></i> Begin Art Quiz Challenge
+                    </button>
+                </div>
+
+                <!-- Quiz Active State -->
+                <div class="quiz-active-state hidden" id="quiz-active-state">
+                    <div class="quiz-top-bar">
+                        <div class="quiz-progress-text">
+                            Question <span id="quiz-curr-q">1</span> of <span id="quiz-total-q">8</span>
+                        </div>
+                        <div class="quiz-score-badge">
+                            Score: <span id="quiz-curr-score">0</span> pts
+                        </div>
+                    </div>
+
+                    <div class="quiz-progress-meter">
+                        <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                    </div>
+
+                    <div class="quiz-question-card">
+                        <div class="quiz-media-wrap" id="quiz-media-wrap">
+                            <!-- SVG or Image -->
+                            <div id="quiz-artwork-display"></div>
+                        </div>
+                        <h3 class="quiz-question-title" id="quiz-question-text">Which ancient art school is celebrated for the serene 'Bodhisattva Padmapani' fresco?</h3>
+                        
+                        <div class="quiz-options-grid" id="quiz-options-grid">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                        <div class="quiz-feedback-box hidden" id="quiz-feedback-box">
+                            <div class="feedback-header">
+                                <i class="fa-solid fa-circle-check" id="feedback-icon"></i>
+                                <span id="feedback-title">Correct!</span>
+                            </div>
+                            <p id="feedback-explanation">Ajanta Cave 1 houses the celebrated 5th-century Gupta-Vakataka fresco of Bodhisattva Padmapani.</p>
+                            <button class="btn btn-primary btn-sm" id="quiz-next-q-btn">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Results State -->
+                <div class="quiz-results-state hidden" id="quiz-results-state">
+                    <div class="results-celebration">
+                        <i class="fa-solid fa-award results-icon"></i>
+                        <h2 id="results-headline">Magnificent! You are an Art Connoisseur</h2>
+                        <p class="results-summary">You scored <strong id="results-final-score">8</strong> out of <strong id="results-max-score">8</strong> (<span id="results-percent">100%</span>)</p>
+                        <p id="results-feedback-msg" class="results-msg">Your mastery of India's aesthetic traditions, royal ateliers, and sacred techniques is truly exceptional.</p>
+                    </div>
+
+                    <div class="results-actions">
+                        <button class="btn btn-primary" id="quiz-restart-btn">
+                            <i class="fa-solid fa-rotate-right"></i> Try Quiz Again
+                        </button>
+                        <a href="#map-explorer" class="btn btn-secondary">
+                            <i class="fa-solid fa-map-location-dot"></i> Back to Live Map
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sources & Scholarly References Section -->
+    <section class="sources-section" id="sources">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow"><i class="fa-solid fa-book-bookmark"></i> Curatorial References</span>
+                <h2>Scholarly Sources & Public Archives</h2>
+                <p class="section-subtitle">Our research draws from peer-reviewed art historical literature, national museums, and open heritage archives.</p>
+            </div>
+
+            <div class="sources-grid">
+                <div class="source-card">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h3>Archaeological Survey of India (ASI)</h3>
+                    <p>Official monographs, site conservation reports, and epigraphical records of protected monuments and rock shelters.</p>
+                    <a href="https://asi.nic.in" target="_blank" rel="noopener noreferrer">Visit ASI Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="source-card">
+                    <i class="fa-solid fa-landmark"></i>
+                    <h3>National Museum, New Delhi</h3>
+                    <p>Curatorial archives of Harappan antiquities, Gupta sculptures, Chola bronzes, and Mughal/Pahari miniatures.</p>
+                    <a href="http://nationalmuseumindia.gov.in" target="_blank" rel="noopener noreferrer">Explore Collections <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="source-card">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>Dr. Ananda Coomaraswamy & Dr. B.N. Goswamy</h3>
+                    <p>Foundational scholarly treatises on Rajput painting, Pahari masters (Nainsukh), Indian aesthetics (Rasa), and temple iconography.</p>
+                    <a href="#intro">Art Historical Canon <i class="fa-solid fa-check"></i></a>
+                </div>
+
+                <div class="source-card">
+                    <i class="fa-solid fa-globe"></i>
+                    <h3>Wikimedia Commons & Open Access</h3>
+                    <p>Public-domain high-resolution documentation of Indian masterworks, frescoes, and heritage sites.</p>
+                    <a href="https://commons.wikimedia.org" target="_blank" rel="noopener noreferrer">Commons Archive <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Chitra<span class="logo-accent">Kala</span> Atlas</h3>
+                    <p>An interactive digital humanities project dedicated to mapping, archiving, and celebrating the unparalleled artistic heritage of the Indian subcontinent.</p>
+                    <div class="footer-socials">
+                        <span class="footer-badge"><i class="fa-solid fa-shield-heart"></i> Preserving Indian Art Traditions</span>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Atlas Explorations</h4>
+                    <a href="#hero">Overview</a>
+                    <a href="#map-explorer">Interactive Art Map</a>
+                    <a href="#tours-section">Guided Thematic Tours</a>
+                    <a href="#influence-section">Diffusion & Trade Routes</a>
+                    <a href="#timeline-section">Chronological Timeline</a>
+                    <a href="#gallery-section">Masterpieces Gallery</a>
+                </div>
+
+                <div class="footer-info">
+                    <h4>Key Traditions Mapped</h4>
+                    <p>&bull; Ajanta & Ellora Cave Murals</p>
+                    <p>&bull; Kishangarh & Kangra Miniatures</p>
+                    <p>&bull; Chola Lost-Wax Bronze Castings</p>
+                    <p>&bull; Warli, Gond & Mithila Folk Arts</p>
+                    <p>&bull; Bengal School of Modern Art</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ChitraKala Indian Art Atlas &bull; Built for cultural exploration and art historical education &bull; All images credit of respective public domain archives.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detailed Location Dossier Modal -->
+    <div class="modal" id="location-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" title="Close Dossier" aria-label="Close Dossier">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Dossier Body -->
+            <div class="modal-body" id="modal-body">
+                <!-- Header Banner -->
+                <div class="modal-header-hero">
+                    <div class="modal-tags-row">
+                        <span class="meta-tag" id="modal-category"><i class="fa-solid fa-brush"></i> Murals & Caves</span>
+                        <span class="meta-tag" id="modal-period"><i class="fa-solid fa-clock"></i> 5th Century CE</span>
+                        <span class="meta-tag" id="modal-region"><i class="fa-solid fa-location-dot"></i> Maharashtra</span>
+                        <span class="meta-tag" id="modal-dynasty"><i class="fa-solid fa-crown"></i> Vakataka Empire</span>
+                    </div>
+                    <h2 id="modal-title">Ajanta Caves & Cave Frescoes</h2>
+                    <p class="modal-tagline" id="modal-tagline">The Zenith of Classical Buddhist Fresco Painting & Celestial Compassion</p>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="modal-tabs-nav">
+                    <button class="modal-tab-btn active" data-tab="tab-overview"><i class="fa-solid fa-circle-info"></i> Overview & Art</button>
+                    <button class="modal-tab-btn" data-tab="tab-context"><i class="fa-solid fa-landmark"></i> Historical Context</button>
+                    <button class="modal-tab-btn" data-tab="tab-technique"><i class="fa-solid fa-paintbrush"></i> Technique & Materials</button>
+                    <button class="modal-tab-btn" data-tab="tab-influence"><i class="fa-solid fa-route"></i> Spread & Influence</button>
+                    <button class="modal-tab-btn" data-tab="tab-audio"><i class="fa-solid fa-headphones"></i> Audio Narration</button>
+                </div>
+
+                <!-- Tab 1: Overview & Masterpiece -->
+                <div class="modal-tab-content active" id="tab-overview">
+                    <div class="modal-grid">
+                        <div class="modal-img-container" id="modal-img-container" title="Click to open Fullscreen Lightbox">
+                            <div id="modal-artwork-box"></div>
+                            <div class="zoom-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</div>
+                            <span class="artwork-caption" id="modal-artwork-title">Bodhisattva Padmapani</span>
+                        </div>
+
+                        <div class="modal-details">
+                            <h3 class="modal-section-title"><i class="fa-solid fa-feather-pointed"></i> Artistic Significance</h3>
+                            <p class="modal-text" id="modal-desc-full"></p>
+                            
+                            <div class="fact-box">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Master Artist / Guild:</strong>
+                                <span id="modal-artist">Vakataka & Gupta Master Monastic Guilds (Sthapatis & Chitrakaras)</span>
+                            </div>
+
+                            <div class="modal-quick-props">
+                                <div class="prop-item">
+                                    <span class="prop-label">Primary Medium:</span>
+                                    <span class="prop-val" id="modal-prop-medium">Mineral tempera on mud & cow dung plaster</span>
+                                </div>
+                                <div class="prop-item">
+                                    <span class="prop-label">Key Themes:</span>
+                                    <span class="prop-val" id="modal-prop-themes">Jataka Tales, Mahayana Buddhist Pantheon, Royal Court Life</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Historical Context & Royal Patronage -->
+                <div class="modal-tab-content" id="tab-context">
+                    <div class="tab-inner-content">
+                        <h3 class="modal-section-title"><i class="fa-solid fa-crown"></i> Dynastic Patronage & Socio-Cultural Era</h3>
+                        <p class="modal-text" id="modal-history-text"></p>
+
+                        <div class="context-columns-grid">
+                            <div class="context-card">
+                                <h4><i class="fa-solid fa-scroll"></i> Dynastic Milestones</h4>
+                                <p id="modal-dynasty-details">Patronized by Harishena of the Vakataka dynasty and wealthy merchants along Deccan trade routes.</p>
+                            </div>
+                            <div class="context-card">
+                                <h4><i class="fa-solid fa-shield-halved"></i> Preservation Status</h4>
+                                <p id="modal-preservation">UNESCO World Heritage Site; under active scientific preservation by the ASI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Technique & Pigments -->
+                <div class="modal-tab-content" id="tab-technique">
+                    <div class="tab-inner-content">
+                        <h3 class="modal-section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Artistic Techniques, Colors & Craftsmanship</h3>
+                        <p class="modal-text" id="modal-technique-text"></p>
+
+                        <div class="technique-pills-list" id="modal-technique-pills">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Geographic Spread & Influence -->
+                <div class="modal-tab-content" id="tab-influence">
+                    <div class="tab-inner-content">
+                        <h3 class="modal-section-title"><i class="fa-solid fa-network-wired"></i> Geographic Spread & Influence Vectors</h3>
+                        <p class="modal-text" id="modal-influence-text"></p>
+
+                        <div class="influence-vector-banner" id="modal-influence-banner">
+                            <div class="vector-start" id="modal-vector-start">Ajanta (Deccan)</div>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                            <div class="vector-end" id="modal-vector-end">Dunhuang (China), Sigiriya (Sri Lanka)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Audio Guide Narration -->
+                <div class="modal-tab-content" id="tab-audio">
+                    <div class="tab-inner-content audio-guide-deck">
+                        <div class="audio-player-card">
+                            <div class="audio-visualizer-icon">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </div>
+                            <h3>Audio Guide: Spoken Narrative</h3>
+                            <p class="audio-subtitle">Listen to curatorial insights about <span id="modal-audio-target-name">Ajanta</span> narrated via speech synthesizer.</p>
+                            
+                            <div class="audio-controls-row">
+                                <button class="btn btn-primary" id="modal-audio-play-btn">
+                                    <i class="fa-solid fa-play"></i> <span id="audio-play-text">Play Narration</span>
+                                </button>
+                                <button class="btn btn-secondary" id="modal-audio-stop-btn">
+                                    <i class="fa-solid fa-stop"></i> Stop
+                                </button>
+                            </div>
+
+                            <div class="audio-speech-settings">
+                                <label for="speech-rate-select">Voice Speed:</label>
+                                <select id="speech-rate-select" class="custom-select-sm">
+                                    <option value="0.9">0.9x (Relaxed Storytelling)</option>
+                                    <option value="1.0" selected>1.0x (Standard)</option>
+                                    <option value="1.15">1.15x (Brisk)</option>
+                                </select>
+                            </div>
+
+                            <div class="audio-transcript-card">
+                                <h4><i class="fa-solid fa-file-lines"></i> Spoken Transcript</h4>
+                                <p id="modal-audio-transcript" class="transcript-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer Nav -->
+            <div class="modal-nav">
+                <button class="btn-nav" id="modal-prev-btn"><i class="fa-solid fa-arrow-left"></i> Previous Hub</button>
+                <div class="modal-center-actions">
+                    <button class="btn-nav" id="modal-bookmark-action"><i class="fa-regular fa-bookmark"></i> Save to Expedition</button>
+                    <button class="btn-nav" id="modal-center-map-btn"><i class="fa-solid fa-crosshairs"></i> Locate on Map</button>
+                </div>
+                <button class="btn-nav" id="modal-next-btn">Next Hub <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Artwork Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <button class="lightbox-close" id="lightbox-close-btn" title="Close Lightbox" aria-label="Close Lightbox">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="lightbox-content">
+            <div id="lightbox-artwork-box"></div>
+            <div class="lightbox-caption" id="lightbox-caption">Artwork Title &bull; Location</div>
+        </div>
+    </div>
+
+    <!-- Saved Expedition Itinerary Drawer -->
+    <aside class="expedition-drawer" id="expedition-drawer" aria-hidden="true">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-compass"></i> My Art Expedition</h3>
+            <button class="drawer-close-btn" id="drawer-close-btn" title="Close Expedition Drawer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="drawer-body">
+            <div class="drawer-intro">
+                <p>Bookmark art locations across the map to compile your personalized Indian art history itinerary.</p>
+            </div>
+
+            <div class="saved-hubs-list" id="saved-hubs-list">
+                <!-- Dynamically injected items -->
+                <div class="empty-expedition" id="empty-expedition-msg">
+                    <i class="fa-regular fa-bookmark"></i>
+                    <p>No locations saved yet. Click the bookmark icon on any art hub to add it to your expedition!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            <button class="btn btn-primary btn-block" id="export-itinerary-btn">
+                <i class="fa-solid fa-download"></i> Export Itinerary Summary
+            </button>
+            <button class="btn btn-secondary btn-block" id="clear-expedition-btn">
+                <i class="fa-solid fa-trash-can"></i> Clear All Saved
+            </button>
+        </div>
+    </aside>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scroll-top-btn" title="Scroll to Top" aria-label="Scroll to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Leaflet JS (Multiple CDNs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Application Logic -->
+    <script src="script.js?v=2.1"></script>
+</body>
+</html>
